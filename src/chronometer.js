@@ -1,26 +1,41 @@
 class Chronometer {
   constructor() {
-    // ... your code goes here
+    this.currentTime = 0;
+    this.intervalId = null;
   }
 
   start(printTimeCallback) {
-    // ... your code goes here
-  }
+    this.intervalId = setInterval(() =>{
+      this.currentTime++;
+      if (typeof printTimeCallback === 'function'){
+        printTimeCallback();
+       }}, 1000);
+     }
+  
 
   getMinutes() {
-    // ... your code goes here
+    let minutes = this.currentTime/60
+    let minutesFloor = Math.floor(minutes)
+    return minutesFloor
   }
 
   getSeconds() {
-    // ... your code goes here
+    let seconds = this.currentTime%60
+    return seconds
   }
 
+
+//the lab states we can use .slice() to acheive this, and by searching I think it should be .slice(-2)
+
   computeTwoDigitNumber(value) {
-    // ... your code goes here
+    let stringed = JSON.stringify(value)
+    if (stringed.length >1){
+      return stringed
+    } return 0 + stringed
   }
 
   stop() {
-    // ... your code goes here
+    clearInterval(this.intervalId)
   }
 
   reset() {
